@@ -7,4 +7,5 @@ feature 'Creating links' do
     expect(page).to have_content('Google')
     expect(page).to have_content('google.co.uk')
   end
+
 end

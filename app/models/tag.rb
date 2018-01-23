@@ -4,15 +4,14 @@ require 'dm-postgres-adapter'
 
 require './app/data_mapper_setup.rb'
 
-class Bookmark
+class Tag
 
   include DataMapper::Resource
 
-  has n, :tags, through: Resource
-
   property :id, Serial
-  property :title, String
-  property :url, String
+  property :name, String
+
+  # has n, :bookmarks, :through => Resource
 
 end
 

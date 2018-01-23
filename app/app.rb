@@ -2,7 +2,10 @@ ENV['RACK_ENV'] ||= 'development'
 
 require 'sinatra/base'
 require './app/models/bookmark.rb'
+require './app/models/tag.rb'
 require 'database_cleaner'
+
+require_relative 'data_mapper_setup'
 
 # ENV['RACK_ENV'] ||= 'development'
 p ENV['RACK_ENV']
@@ -23,7 +26,11 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links' do
-    Bookmark.create(url: params[:url], title: params[:title])
+    p bookmark = Bookmark.create(url: params[:url], title: params[:title])
+    p params[:tags]
+    p tag = Tag.first_or_create(name: params[:tags])
+    p bookmark.tags << tag
+    p bookmark.save
     redirect '/links'
   end
 
