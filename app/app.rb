@@ -26,7 +26,7 @@ class BookmarkManager < Sinatra::Base
   end
 
   post '/links' do
-    bookmark = Bookmark.create(url: params[:url], title: params[:title])
+    bookmark = Bookmark.first_or_create(url: params[:url], title: params[:title])
     tag = Tag.new(name: params[:tags])
     bookmark.tags << tag
     bookmark.save
