@@ -1,10 +1,10 @@
-require 'dm-migrations'
-require 'data_mapper'
-require 'dm-postgres-adapter'
+# require 'dm-migrations'
+# require 'data_mapper'
+# require 'dm-postgres-adapter'
+#
+# require './app/models/bookmark.rb'
 
-require './app/models/bookmark.rb'
-
-require './app/data_mapper_setup.rb'
+# require './app/data_mapper_setup.rb'
 
 class Tag
 
