@@ -2,6 +2,8 @@ require 'dm-migrations'
 require 'data_mapper'
 require 'dm-postgres-adapter'
 
+require './app/models/tag.rb'
+
 require './app/data_mapper_setup.rb'
 
 class Bookmark
