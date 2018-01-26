@@ -1,13 +1,16 @@
 source 'https://rubygems.org'
 
-ruby '2.4.1'
-
-gem 'bcrypt'
 gem 'data_mapper'
 gem 'dm-postgres-adapter'
-gem 'capybara'
-gem 'rspec'
 gem 'sinatra'
-gem 'sinatra-flash'
-gem 'database_cleaner'
+gem 'sinatra-partial'
 gem 'rake'
+gem 'bcrypt'
+gem 'sinatra-flash'
+
+group :test do
+  gem 'byebug'
+  gem 'database_cleaner'
+  gem 'capybara'
+  gem 'rspec'
+end
