@@ -10,7 +10,7 @@ require './app/models/bookmark.rb'
 require './app/models/tag.rb'
 
 class BookmarkManager < Sinatra::Base
-
+  use Rack::MethodOverride
   enable :sessions
   set :session_secret, 'super secret'
 
@@ -87,6 +87,12 @@ class BookmarkManager < Sinatra::Base
     end
   end
 
+  delete '/sessions' do
+    session[:user_id] = nil
+    flash.keep[:notice] = 'goodbye!'
+    redirect to '/links'
+  end
+  
   run! if app_file == $0
 
 end
