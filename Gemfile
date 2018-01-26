@@ -7,10 +7,10 @@ gem 'sinatra-partial'
 gem 'rake'
 gem 'bcrypt'
 gem 'sinatra-flash'
+gem 'database_cleaner'
 
 group :test do
   gem 'byebug'
-  gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec'
 end
