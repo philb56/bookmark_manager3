@@ -7,7 +7,8 @@
   <body>
     <h1>Bookmark Manager</h1>
     <% if current_user %>
-      Welcome, <%= current_user.email %>
+Welcome
+      <!-- Welcome, <%= current_user.email %> -->
     <% end %>
     <%= yield %>  <!-- this then yields to the view which has been called by your controller -->
   </body>
