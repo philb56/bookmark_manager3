@@ -67,9 +67,7 @@ class BookmarkManager < Sinatra::Base
       # if it's not valid,
       # we'll render the sign up form again
     else
-      #message = "Password and confirmation password do not match" if @user.errors[:password]
-      # message = "Invalid Email Address" if @user.errors[:email]
-      flash.now[:notice] = "Password and confirmation password do not match"
+      flash.now[:errors] = @user.errors.full_messages
       erb :'users/new'
     end
   end
