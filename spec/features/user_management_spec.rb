@@ -16,4 +16,14 @@ feature 'User sign up' do
     expect(page).to have_content("Password and confirmation password do not match")
   end
 
+  scenario 'can\'t create user if email blank' do
+    # again it's questionable whether we should be testing the model at this
+    # level.  We are mixing integration tests with feature tests.
+    # However, it's convenient for our purposes.
+    expect { sign_up(email: nil) }.not_to change(User, :count)
+  end
+  scenario 'can\'t create user if email invalid' do
+    expect { sign_up(email: 'invalidEmailAddress') }.not_to change(User, :count)
+  end
+
 end
