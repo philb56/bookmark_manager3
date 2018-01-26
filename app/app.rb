@@ -7,11 +7,16 @@ require './app/models/bookmark.rb'
 require './app/models/tag.rb'
 require 'database_cleaner'
 
-
-# ENV['RACK_ENV'] ||= 'development'
-p ENV['RACK_ENV']
-
 class BookmarkManager < Sinatra::Base
+
+  enable :sessions
+  set :session_secret, 'super secret'
+
+  helpers do
+    def current_user
+      @current_user ||= User.get(session[:user_id])
+    end
+  end
 
   get '/' do
     "Hello"
@@ -28,13 +33,10 @@ class BookmarkManager < Sinatra::Base
 
   post '/links' do
     bookmark = Bookmark.first_or_create(url: params[:url], title: params[:title])
-    # tag = Tag.new(name: params[:tags])
     params[:tags].split.each do |tag|
       bookmark.tags << Tag.first_or_create(name: tag)
     end
-    # bookmark.tags << tag
     bookmark.save
-    # bookmark = Bookmark.create(url: params[:url], title: params[:title], tags: [Tag.new(name: params[:tags])])
     redirect '/links'
   end
 
@@ -42,6 +44,17 @@ class BookmarkManager < Sinatra::Base
    tag = Tag.first(name: params[:name])
    @links = tag ? tag.bookmarks : []
    erb :'/links'
+  end
+
+  get '/users/new' do
+    erb :'users/new'
+  end
+
+  post '/users' do
+    user = User.create(email: params[:email],
+                       password: params[:password])
+    session[:user_id] = user.id
+    redirect to('/links')
   end
 
   run! if app_file == $0

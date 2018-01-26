@@ -8,7 +8,7 @@ feature 'Sorting the links by tags' do
 
   scenario 'user can see all the links with bubbles tag' do
     visit ('/tags/bubbles')
-
+ 
     within 'ul#links' do
      expect(page).not_to have_content('Makers Academy')
      expect(page).to have_content('Google')
